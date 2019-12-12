@@ -2,6 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const Submit = styled.button`
+  background: #a7333f;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  font-size: 16px;
+`;
+
+const UserCard = styled.div`
+  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.12),
+    0 2px 5px 1px rgba(0, 0, 0, 0.24);
+  background: #525252;
+  width: 500px;
+  margin: 10px auto;
+  padding: 10px 0;
+`;
 
 const SignUpForm = ({ values, errors, touched, status }) => {
   //   console.log('errors', errors);
@@ -16,40 +34,60 @@ const SignUpForm = ({ values, errors, touched, status }) => {
 
   return (
     <div>
-      <Form>
+      <Form className='signup-container'>
+        <h2>Sign Up</h2>
         <label>
           Name
-          <Field type='text' name='name' placeholder='Enter your name' />
+          <br />
+          <Field
+            className='input'
+            type='text'
+            name='name'
+            placeholder='Enter your name'
+          />
           {touched.name && errors && <p>{errors.name}</p>}
         </label>
         <label>
           Email
-          <Field type='text' name='email' placeholder='Enter your email' />
+          <br />
+          <Field
+            className='input'
+            type='text'
+            name='email'
+            placeholder='Enter your email'
+          />
           {touched.email && errors && <p>{errors.email}</p>}
         </label>
         <label>
           Password
+          <br />
           <Field
+            className='input'
             type='text'
             name='password'
             placeholder='Enter your password'
           />
-          {touched.email && errors && <p>{errors.password}</p>}
+          {touched.password && errors && <p>{errors.password}</p>}
         </label>
-        <label>
+        <label className='checkbox-container'>
           Terms of Service
-          <Field type='checkbox' name='terms' checked={values.terms} />
+          <Field
+            className='checkbox'
+            type='checkbox'
+            name='terms'
+            checked={values.terms}
+          />
         </label>
-        <button type='submit'>Submit</button>
+        <Submit type='submit'>Submit</Submit>
       </Form>
       {users.map(user => {
         return (
-          <div key={user.id}>
+          <UserCard key={user.id}>
             <h3>Name:</h3>
             <p>{user.name}</p>
             <h3>Email:</h3>
             <p>{user.email}</p>
-          </div>
+          </UserCard>
         );
       })}
     </div>
