@@ -19,7 +19,7 @@ const SignUpForm = ({ values, errors, touched }) => {
       </label>
       <label>
         Password
-        <Field type='text' name='email' placeholder='Enter your password' />
+        <Field type='text' name='password' placeholder='Enter your password' />
         {touched.email && errors && <p>{errors.password}</p>}
       </label>
       <label>
@@ -45,7 +45,10 @@ const FormikForm = withFormik({
     email: Yup.string().required('Please enter your email'),
     password: Yup.string().required('Please enter a password'),
     terms: Yup.boolean()
-  })
+  }),
+  handleSubmit(values, { setStatus }) {
+    console.log('submitting', values);
+  }
 })(SignUpForm);
 
 export default FormikForm;
